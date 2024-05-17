@@ -1,0 +1,32 @@
+
+
+
+NLTK
+1.	Tokenizing_Words.py: Questo modulo contiene una classe Tokenizer che suddivide il testo in frasi o parole.
+2.	Bias_Handler.py: Questo modulo contiene una classe BiasHandler che gestisce il bias nei dati di addestramento e valuta la precisione, il recall e il punteggio F1 del modello.
+3.	Chinking.py: Questo modulo contiene una classe Chinker che rimuove una parte di una struttura di chunking.
+4.	Chunking.py: Questo modulo contiene una classe Chunker che raggruppa le parole in "chunk" utilizzando espressioni regolari.
+5.	Classifier_Training.py: Questo modulo contiene una classe SklearnClassifiers che addestra vari classificatori di scikit-learn sui dati.
+6.	Converting_words_to_Features.py: Questo modulo contiene una classe FeatureExtractor che converte le parole in caratteristiche utilizzabili per l'addestramento del modello.
+7.	Corpora.py: Questo modulo contiene una classe CorpusHandler che carica e tokenizza un corpus di testo.
+8.	Lemmatizing.py: Questo modulo contiene una classe Lemmatizer che lemmatizza le parole (riduce le parole alla loro forma base).
+9.	Naive_Bayes_Classifier.py: Questo modulo contiene una classe NaiveBayesTextClassification che addestra un classificatore Naive Bayes sui dati.
+10.	NER.py: Questo modulo contiene una classe NER che esegue il Named Entity Recognition (NER) sul testo.
+11.	NLP_Pipeline.py: Questo modulo contiene una classe VoteClassifier che combina i voti di vari classificatori per fare una previsione.
+12.	Pos_Tagger.py: Questo modulo contiene una classe PosTagger che esegue il Part-of-Speech tagging sul testo.
+13.	Saving_classifiers.py: Questo modulo contiene una classe NaiveBayesTextClassification che addestra un classificatore, lo salva e lo carica.
+14.	Stemming.py: Questo modulo contiene una classe Stemmer che esegue lo stemming delle parole (riduce le parole alla loro radice).
+15.	StopWords.py: Questo modulo contiene una classe RemoveStopWords che rimuove le parole di stop dal testo.
+16.	Text_Classification.py: Questo modulo contiene una classe TextClassification che addestra un classificatore Naive Bayes e lo usa per classificare il testo.
+17.	WordNet.py: Questo modulo contiene una classe WordNet che recupera i sinonimi di una parola utilizzando WordNet.
+
+DSP
+1.	Sinusoid.py: Questo modulo contiene due funzioni, genSine e genComplexSine. genSine genera una sinusoidale reale data l'ampiezza, la frequenza, la fase iniziale, la frequenza di campionamento e la durata. genComplexSine genera la sinusoidale complessa utilizzata nel calcolo della DFT.
+2.	Fourier.py: Questo modulo contiene tre funzioni, compute_exponential, DFT e IDFT. compute_exponential calcola l'esponenziale complesso per la DFT o IDFT. DFT calcola la Trasformata di Fourier Discreta di un segnale. IDFT calcola la Trasformata Inversa di Fourier Discreta di uno spettro.
+3.	DFTProperties.py: Questo modulo contiene diverse funzioni che applicano varie proprietà della DFT, come la linearità, lo shift, la simmetria e la convoluzione. Inoltre, contiene una funzione minimize_energy_spread che minimizza la diffusione di energia nella DFT di due sinusoidi.
+4.	AdvancedFourier.py: Questo modulo contiene diverse funzioni che applicano tecniche avanzate relative alla DFT, come la verifica della conservazione dell'energia, la conversione dell'ampiezza in decibel, lo svolgimento della fase, il padding di zero, la FFT, l'applicazione di una finestra a fase zero, l'analisi e la sintesi, il padding di zero ottimale, la verifica della simmetria e l'applicazione di un filtro.
+5.	Spectrum.py: Questo modulo contiene una funzione, genMagnitudeSpectrum, che genera lo spettro di ampiezza di un segnale.
+
+Voice Recognition
+1.	Audio_Input.py: Questo modulo contiene una classe AudioInput che gestisce la registrazione audio. Ha metodi per iniziare e fermare la registrazione, e per ottenere i dati audio registrati. Inoltre, ha un metodo get_fourier_transform che restituisce la trasformata di Fourier dei dati audio.
+2.	Voice_Recognition.py: Questo modulo contiene una classe VoiceRecognition che gestisce il riconoscimento vocale. Utilizza la classe AudioInput per registrare l'audio, quindi esegue la trasformata di Fourier sui dati audio e li tokenizza. Infine, classifica i token utilizzando un modello di classificazione del testo. Ha anche un metodo audio_to_text che converte l'audio registrato in testo utilizzando il servizio di riconoscimento vocale di Google.

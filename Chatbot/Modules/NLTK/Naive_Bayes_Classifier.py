@@ -29,11 +29,9 @@ class NaiveBayesTextClassification:
         if not featuresets:
             raise ValueError("No features could be extracted from the documents")
         self.classifier.train_model(featuresets, num_train)
-
+        
     def classify(self, new_text):
-        if self.classifier is None:
-            raise ValueError("The model has not been trained yet")
-        preprocessed_text = self.preprocess((new_text, None))[0]
+        preprocessed_text = self.preprocess((new_text, ""))[0]
         features = self.extractor.find_features(preprocessed_text)
         if not features:
             raise ValueError("No features could be extracted from the new text")

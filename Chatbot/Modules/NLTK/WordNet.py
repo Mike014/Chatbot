@@ -1,3 +1,4 @@
+
 import nltk
 from nltk.corpus import wordnet
 from Lemmatizing import Lemmatizer
@@ -11,7 +12,6 @@ class WordNet:
     def get_synonyms(self):
         try:
             lemmatized_word = self.lemmatizer.lemmatize()
-            # Ensure lemmatized_word is a string
             if isinstance(lemmatized_word, list):
                 lemmatized_word = lemmatized_word[0]
             synonyms = []

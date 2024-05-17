@@ -52,6 +52,8 @@ class TextClassification:
     
     def classify_many(self, texts):
         return [self.classify_text(text) for text in texts]
+
+
     
 
     

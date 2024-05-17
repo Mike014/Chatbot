@@ -27,5 +27,8 @@ class FeatureExtractor:
         except ValueError:
             print("Each document should be a tuple of two elements: (rev, category)")
             return []
+        
+
+
 
 
