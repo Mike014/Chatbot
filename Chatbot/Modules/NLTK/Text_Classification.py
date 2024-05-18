@@ -5,7 +5,9 @@ from nltk.classify import NaiveBayesClassifier
 from nltk.classify.util import accuracy as nltk_accuracy
 
 class TextClassification:
-    def __init__(self):
+    def __init__(self, model, vectorizer):
+        self.model = model
+        self.vectorizer = vectorizer
         self.train_set = None
         self.test_set = None
         self.classifier = None

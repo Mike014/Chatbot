@@ -2,8 +2,8 @@ import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 
 class Tokenizer:
-    def __init__(self):
-        self.text = None
+    def __init__(self, text=None):
+        self.text = text
 
     def set_text(self, text):
         if not isinstance(text, str):
@@ -29,4 +29,10 @@ class Tokenizer:
         except Exception as e:
             print("An error occurred while tokenizing words: %s" % str(e))
             return []
+        
+def tokenize(text):
+    tokenizer = Tokenizer()
+    tokenizer.set_text(text)
+    return tokenizer.tokenize_word()
+
 

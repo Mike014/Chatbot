@@ -22,6 +22,9 @@ class Lemmatizer:
             print("An error occurred while lemmatizing words: %s" % str(e))
             return []
 
+def lemmatize(text):
+    lemmatizer = Lemmatizer(text)
+    return lemmatizer.lemmatize()
 
                     
         
