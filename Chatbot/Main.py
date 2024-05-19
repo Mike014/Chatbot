@@ -107,9 +107,10 @@ def main():
     audio_input.start_recording(done_event)
     done_event.wait()  # Wait for the recording to finish
     done_event.clear()  # Reset the Event object
-    
-    audio_data = audio_input.get_audio_data()
-    
+
+    # Stop the recording after it has finished
+    audio_data = audio_input.stop_recording()
+
     # Recognize the audio
     recognized_audio = voice_recognition.recognize(audio_data)
     print("Recognized audio: ", recognized_audio)
@@ -149,8 +150,11 @@ def main():
     prediction = model.predict(command_vectorized)
 
     print("The prediction for the new command is: ", prediction)
-
-    if prediction[0] == 'generate_sine_wave':
+    
+    # Check the prediction
+    while prediction[0] == 'generate_sine_wave':
+        
+        # Check if the queue is empty
         match = re.search(r'\d+', command)
         if match:
             frequency = int(match.group())
@@ -159,27 +163,25 @@ def main():
             print("Command: ", command)
             print("Match: ", match)
             print(list(commands.queue))
-            
+    
             commands.task_done()
-            command = None  # Clear the command
+            command = None 
+            break
+
         else:
             print("Frequency not found in command")
+            commands.task_done()
             commands.task_done()
     
     else:
         print("Command not recognized")
-        commands.task_done()
-        
+        if not commands.empty():
+            command = commands.get()
+            print("Next command: ", command)
+            
     command = None
-
-    # Stop the recording after the command has been processed
-    audio_input.stop_recording()
+    
 
 # Main script
 if __name__ == "__main__":
     main()
-
-
-
-
-

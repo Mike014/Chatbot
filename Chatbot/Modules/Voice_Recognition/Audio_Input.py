@@ -32,11 +32,11 @@ class AudioInput:
             return None
     
     def record(self, done_event):
-        for i in range(0, int(self.rate / self.chunk * self.record_seconds)):
-            data = self.stream.read(self.chunk)
-            self.frames.append(data)
-        done_event.set()
-        done_event.clear()
+        for i in range(0, int(self.rate / self.chunk * self.record_seconds)): # Loop through the audio data
+            data = self.stream.read(self.chunk) # Read the audio data
+            self.frames.append(data) # Append the audio data to the frames list
+        done_event.set() # Set the Event object to signal that the recording is done
+        done_event.clear() # Clear the Event object
             
     def stop_recording(self):
         print("Stop Recording...")
@@ -49,16 +49,16 @@ class AudioInput:
         self.stream.close()
         self.p.terminate()
         
-        wf = wave.open(self.filename, 'wb')
-        wf.setnchannels(1)
-        wf.setsampwidth(self.p.get_sample_size(pyaudio.paInt16))
-        wf.setframerate(self.rate)
-        wf.writeframes(b''.join(self.frames))
-        wf.close()
-        return self.get_audio_data()
+        wf = wave.open(self.filename, 'wb') # Open the WAV file
+        wf.setnchannels(1) # Set the number of channels
+        wf.setsampwidth(self.p.get_sample_size(pyaudio.paInt16)) # Set the sample width
+        wf.setframerate(self.rate) # Set the frame rate
+        wf.writeframes(b''.join(self.frames)) # Write the frames to the WAV file
+        wf.close() # Close the WAV file
+        return self.get_audio_data() # Return the audio data
         
     def get_audio_data(self):
-        audio_data = np.frombuffer(b''.join(self.frames), dtype=np.int16)
+        audio_data = np.frombuffer(b''.join(self.frames), dtype=np.int16) # Convert the frames to a NumPy array
         return audio_data
 
     def get_fourier_transform(self):
@@ -75,4 +75,4 @@ class AudioInput:
 #     print(audio_input.get_fourier_transform())
 
 
-    
+      
