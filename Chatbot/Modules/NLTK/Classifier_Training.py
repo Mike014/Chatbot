@@ -43,6 +43,7 @@ class SklearnClassifiers:
             print(f"Error training classifiers: {e}")
         except Exception as e:
             print(f"Error training classifiers: {e}")
+        return self.classifiers
                         
                     
 

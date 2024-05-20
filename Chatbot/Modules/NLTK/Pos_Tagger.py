@@ -12,7 +12,7 @@ class PosTagger:
         if not text or not train_text:
             raise ValueError("Received an empty string for text or train_text")
         self.text = text
-        self.train_text = train_texta
+        self.train_text = train_text
         self.sent_tokenizer = PunktSentenceTokenizer(train_text)
         
     def pos_tag(self):

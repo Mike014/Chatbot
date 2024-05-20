@@ -46,11 +46,11 @@ class BiasHandler:
             print("Data splitting failed.")
             return None, None, None
     
-# # example of usage
-# if __name__ == "__main__":
-#     documents = [("I love this movie", "pos"), ("I hate this movie", "neg"), ("I like this movie", "pos")]
-#     bias_handler = BiasHandler(documents)
-#     precision, recall, f1 = bias_handler.train_and_evaluate()
-#     print("Precision:", precision)
-#     print("Recall:", recall)
-#     print("F1 Score:", f1)
+# example of usage
+if __name__ == "__main__":
+    documents = [("I love this movie", "pos"), ("I hate this movie", "neg"), ("I like this movie", "pos")]
+    bias_handler = BiasHandler(documents)
+    precision, recall, f1 = bias_handler.train_and_evaluate()
+    print("Precision:", precision)
+    print("Recall:", recall)
+    print("F1 Score:", f1)
