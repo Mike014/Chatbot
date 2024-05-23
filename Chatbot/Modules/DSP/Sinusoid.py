@@ -15,8 +15,9 @@ def genSine(A, f, phi, fs, t):
     Returns:
     x (numpy array): The generated sinusoid
     """
-    n = np.arange(fs * t)
-    x = A * np.cos(2 * np.pi * f * n / fs + phi)
+    n = np.arange(int(fs * t))
+    phases = 2 * np.pi * f * n / fs + phi
+    x = A * np.sin(phases)
     return x
 
 def genComplexSine(k, N):

@@ -5,7 +5,7 @@ import threading
 import numpy as np
 import sys
 sys.path.append('C:\\Users\\PC\\source\\repos\\Chatbot\\Chatbot\\DSP')
-from AdvancedFourier import FFT
+from Fourier_Analysis import FFT
 
 class AudioInput:
     def __init__(self, filename="output.wav", rate=44100, chunk=1024, record_seconds=7):

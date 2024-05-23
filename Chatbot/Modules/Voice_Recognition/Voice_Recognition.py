@@ -13,7 +13,7 @@ sys.path.append("c:\\users\\pc\\source\\repos\\chatbot\\chatbot\\nltk")
 
 # Import custom modules
 from Audio_Input import AudioInput
-from AdvancedFourier import FFT
+from Fourier_Analysis import FFT
 from Tokenizing_Words import Tokenizer
 from Text_Classification import TextClassification
 

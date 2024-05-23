@@ -1,5 +1,3 @@
-
-
 import nltk
 from nltk.corpus import wordnet
 from Lemmatizing import Lemmatizer
@@ -23,6 +21,8 @@ class WordNet:
         except Exception as e:
             print("An error occurred while retrieving synonyms: %s" % str(e))
             return []
+
+
 
         
     
