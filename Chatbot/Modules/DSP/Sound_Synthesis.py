@@ -1,3 +1,4 @@
+
 from winsound import PlaySound
 import numpy as np
 import scipy.signal as signal
@@ -80,12 +81,22 @@ def generate_melody(frequencies, amplitudes, fs, t):
     Returns:
     x (numpy array): The generated melody signal
     """
+    
+    # if not isinstance(frequencies, list) or not isinstance(amplitudes, list):
+    #     raise ValueError("Frequencies and amplitudes must be lists.")
+        
     x = np.zeros(int(fs * t))
     for f, A in zip(frequencies, amplitudes):
         x += A * genSine(1, f, 0, fs, t)
     # Normalize the signal to prevent clipping
     x /= np.max(np.abs(x))
     return x
+
+def generate_melody_(amplitude, frequency, fs, t):
+    t = np.arange(fs*t)
+    wave = amplitude * np.sin(2 * np.pi * frequency * t / fs)
+    wave /= np.max(np.abs(wave))
+    return wave
     
 def generate_complex_melody(frequencies, amplitudes, fs, t):
     """
@@ -125,6 +136,23 @@ def generate_chirp(f0, f1, t, method='linear', fs=48000):
     x = chirp(times, f0, t, f1, method=method)
     # Normalize the signal to prevent clipping
     x /= np.max(np.abs(x))
+    return x
+
+def generate_sine_wave(frequency, amplitude, fs, t):
+    """
+    Generate a sine wave signal given the frequency, amplitude, sampling rate, and duration.
+
+    Parameters:
+    frequency (float): The frequency of the sine wave in Hz
+    amplitude (float): The amplitude of the sine wave
+    fs (float): The sampling frequency of the sine wave in Hz
+    t (float): The duration of the sine wave in seconds
+
+    Returns:
+    x (numpy array): The generated sine wave signal
+    """
+    samples = np.arange(fs * t)
+    x = amplitude * np.sin(2 * np.pi * frequency * samples / fs)
     return x
 
 def generate_square_wave(frequency, amplitude, fs, t):
@@ -178,29 +206,24 @@ def generate_triangle_wave(frequency, amplitude, fs, t):
     x = amplitude * signal.sawtooth(2 * np.pi * frequency * samples / fs, width=0.5)
     return x
 
-# # Test square wave, triangle wave, sawtooth wave
-# if __name__ == '__main__':
-#     fs = 48000
-#     t = 1
-#     frequency = 440
-#     amplitude = 1
-#     x_square = generate_square_wave(frequency, amplitude, fs, t)
-#     x_triangle = generate_triangle_wave(frequency, amplitude, fs, t)
-#     x_sawtooth = generate_sawtooth_wave(frequency, amplitude, fs, t)
-#     t = np.linspace(0, t, len(x_square))
-#     plt.figure()
-#     plt.subplot(3, 1, 1)
-#     plt.plot(t, x_square)
-#     plt.title('Square Wave')
-#     plt.subplot(3, 1, 2)
-#     plt.plot(t, x_triangle)
-#     plt.title('Triangle Wave')
-#     plt.subplot(3, 1, 3)
-#     plt.plot(t, x_sawtooth)
-#     plt.title('Sawtooth Wave')
-#     plt.tight_layout()
-#     plt.show()
+# test generate_melody a play it
+if __name__ == "__main__":
+    frequencies = [440, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99, 880]
+    amplitudes = [1, 1, 1, 1, 1, 1, 1, 1]
+    fs = 44100
+    t = 2
+    melody = generate_melody(frequencies, amplitudes, fs, t)
+    play_audio(melody, fs)
+    plt.plot(melody[:44100])
+    plt.show()
+
     
+
+
+
+
+
+
 
 
 

@@ -31,7 +31,7 @@ def DFT(x):
     """
     N = len(x)
     e = compute_exponential(N)
-    return np.dot(e, x)
+    return np.dot(e, x) 
 
 def IDFT(X):
     """

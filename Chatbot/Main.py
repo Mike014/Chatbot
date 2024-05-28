@@ -181,7 +181,6 @@ def main():
             
     command = None
     
-
 # Main script
 if __name__ == "__main__":
     main()

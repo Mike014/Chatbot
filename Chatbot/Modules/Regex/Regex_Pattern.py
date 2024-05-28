@@ -1,6 +1,6 @@
-import re 
+import re
+from Regex.Regex_Search import RegexSearch 
 from Regex_Match import RegexMatch
-
 
 WORD = re.compile(r'\w+') # Matches any word character (alphanumeric & underscore)
 NON_WORD = re.compile(r'\W+') # Matches any non-word character
@@ -28,6 +28,10 @@ def word_preceded_by(word, preceding):
 
 def case_sensitive(pattern):
     return re.compile(pattern, re.IGNORECASE)
+
+def compile_and_search(pattern):
+    compile_pattern = re.compile(pattern)
+    return RegexSearch(compile_pattern)
 
 # # Test RegexMatch class with the following code
 # if __name__ == '__main__':
