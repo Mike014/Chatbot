@@ -60,9 +60,10 @@ This repository contains the prototype of a ChatBot designed for audio playback 
 - If you encounter issues, make sure you have all the necessary dependencies installed and check for any specific installation instructions in the repository.
 - Refer to the repository's README file for more details and updates.
 
-##Video on YouTube##
-- (https://www.youtube.com/watch?v=RP8IiiImbO0&list=PLgKASgLUSpNaUfSrkMirwRU2skzNGbnRs&index=52) In the video, you'll see how, given a user input, the chatbot interprets the user's intent and matches the input value to one of the keys in the chord dictionary. For instance, if the user requests a "C major", the chatbot locates this chord in the dictionary and generates the sound wave corresponding to the specified frequencies.
-- (https://www.youtube.com/watch?v=tjzaMJyNJys&list=PLgKASgLUSpNaUfSrkMirwRU2skzNGbnRs&index=48) This application uses the pygame, speech_recognition, and pydub libraries to play a Pink Noise audio file and control its stereo positioning, or 'panning', through voice commands.
+## Video on YouTube ##
+- <iframe width="150" height="70" src="https://www.youtube.com/watch?v=RP8IiiImbO0&list=PLgKASgLUSpNaUfSrkMirwRU2skzNGbnRs&index=52" frameborder="0" allowfullscreen></iframe>
+In the video, you'll see how, given a user input, the chatbot interprets the user's intent and matches the input value to one of the keys in the chord dictionary. For instance, if the user requests a "C major", the chatbot locates this chord in the dictionary and generates the sound wave corresponding to the specified frequencies.
+- <iframe width="150" height="70" src="https://www.youtube.com/watch?v=tjzaMJyNJys&list=PLgKASgLUSpNaUfSrkMirwRU2skzNGbnRs&index=48" frameborder="0" allowfullscreen></iframe> This application uses the pygame, speech_recognition, and pydub libraries to play a Pink Noise audio file and control its stereo positioning, or 'panning', through voice commands.
 For the best experience, put on your headphones and listen as the user speaks commands like "right", "left", "center", "center right", and "center left" to control the stereo position of the sound. Saying "right" pans the sound entirely to the right channel, while "left" pans it to the left. Saying "center" balances the sound equally between both channels.
 
 For more information, visit the repository: [GitHub - ChatBot](https://github.com/Mike014/Chatbot.git)
