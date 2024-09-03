@@ -70,4 +70,3 @@ In the video, you'll see how, given a user input, the chatbot interprets the use
 [![Video 2](https://img.youtube.com/vi/tjzaMJyNJys/0.jpg)](https://www.youtube.com/watch?v=tjzaMJyNJys&list=PLgKASgLUSpNaUfSrkMirwRU2skzNGbnRs&index=48)
 This application uses the pygame, speech_recognition, and pydub libraries to play a Pink Noise audio file and control its stereo positioning, or 'panning', through voice commands. For the best experience, put on your headphones and listen as the user speaks commands like "right", "left", "center", "center right", and "center left" to control the stereo position of the sound. Saying "right" pans the sound entirely to the right channel, while "left" pans it to the left. Saying "center" balances the sound equally between both channels.
 
-For more information, visit the repository: [GitHub - ChatBot](https://drive.google.com/file/d/1NkIxor5wo8f0G4k6X6_gcZdJ29IB8ZLM/view?usp=drive_link)
