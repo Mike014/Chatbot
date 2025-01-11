@@ -1,7 +1,8 @@
 import nltk
 from nltk.stem import WordNetLemmatizer
-from Tokenizing_Words import Tokenizer
 from StopWords import RemoveStopWords
+from Tokenizing_Words import Tokenizer
+
 
 class Lemmatizer:
     def __init__(self, text):
@@ -13,7 +14,7 @@ class Lemmatizer:
         self.tokenizer = Tokenizer(text)
         self.stop_words = RemoveStopWords(text)
         self.lemmatizer = WordNetLemmatizer()
-        
+
     def lemmatize(self, pos=nltk.corpus.reader.wordnet.VERB):
         try:
             word_tokens = self.stop_words.remove()
@@ -22,14 +23,7 @@ class Lemmatizer:
             print("An error occurred while lemmatizing words: %s" % str(e))
             return []
 
+
 def lemmatize(text):
     lemmatizer = Lemmatizer(text)
     return lemmatizer.lemmatize()
-
-                    
-        
-        
-
-
-    
-

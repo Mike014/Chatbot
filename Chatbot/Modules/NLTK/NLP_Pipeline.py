@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-import numpy as np  # Add this line
-from nltk.classify import ClassifierI
 from statistics import mode
+
+import numpy as np  # Add this line
 from Classifier_Training import SklearnClassifiers
+from nltk.classify import ClassifierI
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+
 
 class VoteClassifier(ClassifierI):
     def __init__(self, *classifiers):
@@ -20,7 +22,7 @@ class VoteClassifier(ClassifierI):
             except Exception as e:
                 print(f"Error classifying with {c}: {e}")
         return mode(votes) if votes else None
-        
+
     def confidence(self, features):
         votes = []
         for c in self._classifiers:
@@ -30,16 +32,10 @@ class VoteClassifier(ClassifierI):
                 votes.append(v)
             except Exception as e:
                 print(f"Error classifying with {c}: {e}")
-            
+
         if not votes:
             return 0
 
         choice_votes = votes.count(mode(votes))
         conf = choice_votes / len(votes)
         return conf
-    
-
-
-
-
-    

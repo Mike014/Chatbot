@@ -5,6 +5,7 @@ from pydub import AudioSegment
 
 AUDIO_FILE_PATH = "C:\\Users\\PC\\Desktop\\Pink Noise\\Pink Noise.wav"
 
+
 class SoundPlayer:
     def __init__(self):
         self.sound = AudioSegment.from_file(AUDIO_FILE_PATH)
@@ -26,19 +27,21 @@ class SoundPlayer:
         if self.pygame_sound is not None:
             self.pygame_sound.stop()
 
+
 def recognize_command():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Say something...")
         audio = r.listen(source)
     try:
-        command = r.recognize_google(audio, language='it-IT')
+        command = r.recognize_google(audio, language="it-IT")
         print("You said: " + command)
         command = command.replace("-", " ")  # Replace hyphens with spaces
         return command
     except (sr.UnknownValueError, sr.RequestError) as e:
         print(f"Error: {str(e)}")
         return None
+
 
 sound_player = SoundPlayer()
 
@@ -47,7 +50,7 @@ command_to_pan_value = {
     "sinistra": -1,
     "centro": 0,
     "centro destra": 0.5,
-    "centro sinistra": -0.5
+    "centro sinistra": -0.5,
 }
 
 while True:
@@ -60,6 +63,3 @@ while True:
         break
     else:
         print("Invalid command")
-
-
-

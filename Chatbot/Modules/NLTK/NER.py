@@ -1,10 +1,11 @@
 import nltk
+from Chunking import Chunker
 from nltk.corpus import state_union
 from Pos_Tagger import PosTagger
-from Chunking import Chunker
 
-nltk.download('maxent_ne_chunker')
-nltk.download('words')
+nltk.download("maxent_ne_chunker")
+nltk.download("words")
+
 
 class NER:
     def __init__(self, text, train_text):
@@ -13,8 +14,12 @@ class NER:
         self.pos_tagger = PosTagger(text, train_text)
         self.chunker = Chunker(text, train_text)
 
-    def ner(self, chunk_gram=r"""Chunk: {<.*>+}
-                                    }<VB.?|IN|DT>+{""", draw_trees=False):
+    def ner(
+        self,
+        chunk_gram=r"""Chunk: {<.*>+}
+                                    }<VB.?|IN|DT>+{""",
+        draw_trees=False,
+    ):
         try:
             chunked = self.chunker.chunk(chunk_gram)
             named_entities = [nltk.ne_chunk(chunk.leaves()) for chunk in chunked]
@@ -25,8 +30,3 @@ class NER:
         except Exception as e:
             print(f"An error occurred: {e}")
             return []
-        
-
-
-        
-

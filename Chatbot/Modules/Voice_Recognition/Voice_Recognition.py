@@ -2,20 +2,22 @@
 
 # Import standard libraries
 import sys
+import threading  # Add this line
 import time
+
 import joblib
 import speech_recognition as sr
-import threading  # Add this line
 
 # Add paths for custom modules
-sys.path.append('c:\\users\\pc\\source\\repos\\chatbot\\chatbot\\dsp')
+sys.path.append("c:\\users\\pc\\source\\repos\\chatbot\\chatbot\\dsp")
 sys.path.append("c:\\users\\pc\\source\\repos\\chatbot\\chatbot\\nltk")
 
 # Import custom modules
 from Audio_Input import AudioInput
 from Fourier_Analysis import FFT
-from Tokenizing_Words import Tokenizer
 from Text_Classification import TextClassification
+from Tokenizing_Words import Tokenizer
+
 
 class VoiceRecognition:
     def __init__(self, model, vectorizer):
@@ -27,13 +29,13 @@ class VoiceRecognition:
         self.text_classification.train_model(train_set)
 
     def recognize(self, audio_data):
-        audio_data = audio_data.flatten() 
+        audio_data = audio_data.flatten()
         fft_data = FFT(audio_data)
 
         self.tokenizer.set_text(str(fft_data))
         words = self.tokenizer.tokenize_word()
 
-        if self.text_classification is not None: 
+        if self.text_classification is not None:
             info = self.text_classification.classify(words)
         else:
             info = "error: text_classification is none"
@@ -45,11 +47,12 @@ class VoiceRecognition:
             audio = self.recognizer.record(source)
         try:
             print("recognizing...")
-            return self.recognizer.recognize_google(audio, language = 'en-US')
+            return self.recognizer.recognize_google(audio, language="en-US")
         except sr.UnknownValueError:
             return "could not understand audio"
         except sr.RequestError as e:
             return "could not request results; {0}".format(e)
+
 
 # if __name__ == '__main__':
 #     model = joblib.load('model.pkl')
@@ -66,12 +69,3 @@ class VoiceRecognition:
 #         audio_to_text = voice_recognition.audio_to_text(audio_input.filename)
 #         print("Audio to text: ", audio_to_text)
 #         time.sleep(1)  # Wait for 1 second before starting the next recording
-    
-    
-    
-    
-    
-
-
-
-

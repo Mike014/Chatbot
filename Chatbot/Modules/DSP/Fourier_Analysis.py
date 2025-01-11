@@ -1,5 +1,7 @@
-import numpy as np
 from math import gcd
+
+import numpy as np
+
 
 def compute_exponential(N, inverse=False):
     """
@@ -18,7 +20,8 @@ def compute_exponential(N, inverse=False):
         return np.exp(1j * 2 * np.pi * k * n / N)
     else:
         return np.exp(-2j * np.pi * k * n / N)
-    
+
+
 def DFT(x):
     """
     Compute the Discrete Fourier Transform of a signal
@@ -31,7 +34,8 @@ def DFT(x):
     """
     N = len(x)
     e = compute_exponential(N)
-    return np.dot(e, x) 
+    return np.dot(e, x)
+
 
 def IDFT(X):
     """
@@ -47,6 +51,7 @@ def IDFT(X):
     e = compute_exponential(N, inverse=True)
     return np.dot(e, X) / N
 
+
 def energy_conservation(x):
     """
     Verify the energy conservation property of the DFT.
@@ -59,12 +64,13 @@ def energy_conservation(x):
     energy_freq (float): The energy of the signal in the frequency domain
     """
 
-    energy_time = np.sum(np.abs(x)**2)
+    energy_time = np.sum(np.abs(x) ** 2)
 
     X = DFT(x)
 
-    energy_freq = np.sum(np.abs(X)**2) / len(X)
+    energy_freq = np.sum(np.abs(X) ** 2) / len(X)
     return energy_time, energy_freq
+
 
 def amplitude_in_decibels(X):
     """
@@ -79,6 +85,7 @@ def amplitude_in_decibels(X):
     X_db = 20 * np.log10(np.abs(X))
     return X_db
 
+
 def phase_unwrapping(X):
     """
     Unwrap the phase of the spectrum.
@@ -92,7 +99,8 @@ def phase_unwrapping(X):
     X_unwrapped = np.unwrap(np.angle(X))
     return X_unwrapped
 
-def zero_padding(x, N): 
+
+def zero_padding(x, N):
     """
     Apply zero-padding to the signal.
 
@@ -105,6 +113,7 @@ def zero_padding(x, N):
     """
     x_padded = np.pad(x, (0, N - len(x)))
     return x_padded
+
 
 def FFT(x, real=False):
     """
@@ -123,6 +132,7 @@ def FFT(x, real=False):
         X = np.fft.fft(x)
     return X
 
+
 def apply_zero_phase_window(x, N):
     """
     Apply a zero-phase window to the signal.
@@ -138,6 +148,7 @@ def apply_zero_phase_window(x, N):
     x_windowed = x * window
     return x_windowed
 
+
 def analysis_synthesis(x):
     """
     Perform analysis and synthesis on the signal.
@@ -152,6 +163,7 @@ def analysis_synthesis(x):
     y = np.fft.ifft(X)
     return np.real(y)
 
+
 def optimal_zero_padding(x, f, fs):
     """
     Apply optimal zero-padding to the signal.
@@ -164,16 +176,17 @@ def optimal_zero_padding(x, f, fs):
     Returns:
     X_padded (numpy array): The DFT of the zero-padded signal
     """
-    
+
     T = fs / f
 
     N = int(np.ceil(len(x) / T) * T)
-    
+
     x_padded = zero_padding(x, N)
 
     X_padded = DFT(x_padded)
 
     return X_padded
+
 
 def verify_symmetry(x):
     """
@@ -194,6 +207,7 @@ def verify_symmetry(x):
 
     return is_real, is_even
 
+
 def apply_filter(x, h):
     """
     Apply a filter to the signal.
@@ -205,20 +219,21 @@ def apply_filter(x, h):
     Returns:
     y (numpy array): The filtered signal
     """
-    
+
     # Ensure x and h have the same length
     N = max(len(x), len(h))
     x = zero_padding(x, N)
     h = zero_padding(h, N)
-    
+
     X = DFT(x)
     H = DFT(h)
-    
+
     Y = X * H
 
     y = IDFT(Y)
 
     return np.real(y)
+
 
 def FFT_zero_padding(x):
     """
@@ -230,8 +245,8 @@ def FFT_zero_padding(x):
     Returns:
     X (numpy array): The FFT of the zero-padded signal
     """
-    
-    N = 2**np.ceil(np.log2(len(x)))
+
+    N = 2 ** np.ceil(np.log2(len(x)))
 
     x_padded = zero_padding(x, int(N))
 
@@ -239,21 +254,23 @@ def FFT_zero_padding(x):
 
     return X
 
+
 def apply_linearity(x1, x2, a, b):
     """
     Apply the property of linearity to two signals.
-    
+
     Parameters:
     x1 (numpy array): The first input signal
     x2 (numpy array): The second input signal
     a (float): The scaling factor for the first signal
     b (float): The scaling factor for the second signal
-    
+
     Returns:
     y (numpy array): The output signal after applying linearity
     """
     y = a * x1 + b * x2
     return y
+
 
 def apply_shift(x, n0):
     """
@@ -268,7 +285,8 @@ def apply_shift(x, n0):
     """
     x_shifted = np.roll(x, -n0)
     X = DFT(x_shifted)
-    return X 
+    return X
+
 
 def apply_symmetry(x):
     """
@@ -287,6 +305,7 @@ def apply_symmetry(x):
     X_phase = np.angle(X)
     return X_real, X_imag, X_mag, X_phase
 
+
 def apply_convolution(x1, x2):
     """
     Apply the convolution property of the DFT to the signals x1 and x2.
@@ -297,9 +316,10 @@ def apply_convolution(x1, x2):
     Returns:
     X (numpy array): The DFT of the convolution of x1 and x2
     """
-    x = np.convolve(x1, x2, mode='same')
+    x = np.convolve(x1, x2, mode="same")
     X = DFT(x)
     return X
+
 
 def minimize_energy_spread(A1, f1, A2, f2, fs, t):
     """
@@ -314,7 +334,7 @@ def minimize_energy_spread(A1, f1, A2, f2, fs, t):
     Returns:
     X (numpy array): The DFT of the combined sinusoids
     """
-    
+
     T1 = fs / f1
     T2 = fs / f2
 
@@ -329,6 +349,7 @@ def minimize_energy_spread(A1, f1, A2, f2, fs, t):
     X = DFT(x)
 
     return X
+
 
 # if __name__ == '__main__':
 #     x = np.array([1, 2, 3, 4])
@@ -363,5 +384,3 @@ def minimize_energy_spread(A1, f1, A2, f2, fs, t):
 #     print(X)
 #     X = minimize_energy_spread(1, 10, 2, 20, 100, 1)
 #     print(X)
-
-

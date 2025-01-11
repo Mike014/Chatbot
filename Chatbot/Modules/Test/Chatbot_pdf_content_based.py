@@ -1,20 +1,22 @@
-import speech_recognition as sr
-from PyPDF2 import PdfReader
 import nltk
+import speech_recognition as sr
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from nltk.stem import WordNetLemmatizer
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from PyPDF2 import PdfReader
 
-stopwords = set(stopwords.words('english'))
+stopwords = set(stopwords.words("english"))
 stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
 
-with open('D:\\Roba da autodidatta\\Musica\\Teoria e Armonia Musicale\\Hollywood Chord Progressions.pdf', 'rb') as f:
+with open(
+    "D:\\Roba da autodidatta\\Musica\\Teoria e Armonia Musicale\\Hollywood Chord Progressions.pdf",
+    "rb",
+) as f:
     reader = PdfReader(f)
-    raw = ''
+    raw = ""
     for i in range(len(reader.pages)):
         raw += reader.pages[i].extract_text()
-        
+
 tokens = nltk.word_tokenize(raw)
 tokens = [token for token in tokens if token not in stopwords]
 tokens = [stemmer.stem(token) for token in tokens]
@@ -28,23 +30,27 @@ while True:
     with sr.Microphone() as source:
         print("Say something!")
         audio = r.listen(source)
-        
+
     try:
         question = r.recognize_google(audio)
         print("You said: " + question)
-        
+
         if question.lower() == "stop":
             break
-        
+
         keywords = nltk.word_tokenize(question)
-        keywords = [stemmer.stem(keyword) for keyword in keywords if keyword not in stopwords]
-        
+        keywords = [
+            stemmer.stem(keyword) for keyword in keywords if keyword not in stopwords
+        ]
+
         for keyword in keywords:
             text.concordance(keyword)
-            
+
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
     except sr.RequestError as e:
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
-    
-           
+        print(
+            "Could not request results from Google Speech Recognition service; {0}".format(
+                e
+            )
+        )

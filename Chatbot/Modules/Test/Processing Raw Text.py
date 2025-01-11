@@ -1,11 +1,11 @@
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from nltk.stem import WordNetLemmatizer
 import re
 
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+
 # Initialize resources for text pre-processing
-stop_words = set(stopwords.words('english'))
+stop_words = set(stopwords.words("english"))
 stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
 

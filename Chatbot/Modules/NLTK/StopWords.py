@@ -2,8 +2,9 @@ import nltk
 from nltk.corpus import stopwords
 from Tokenizing_Words import Tokenizer
 
+
 class RemoveStopWords:
-    def __init__(self, text, language='english'):
+    def __init__(self, text, language="english"):
         if not isinstance(text, str):
             raise ValueError("Expected a string, but received: %s" % type(text))
         if not text:
@@ -14,7 +15,7 @@ class RemoveStopWords:
             self.stop_words = set(stopwords.words(language))
         except Exception as e:
             raise ValueError("An error occurred while loading stop words: %s" % str(e))
-        
+
     def remove(self):
         try:
             word_tokens = self.tokenizer.tokenize_word()
@@ -22,4 +23,3 @@ class RemoveStopWords:
         except Exception as e:
             print("An error occurred while removing stop words: %s" % str(e))
             return []
-

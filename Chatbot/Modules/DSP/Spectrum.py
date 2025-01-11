@@ -1,6 +1,7 @@
 import numpy as np
 from AdvancedFourier import FFT
 
+
 def genMagnitudeSpectrum(x):
     """
     Generate the magnitude spectrum of a signal.

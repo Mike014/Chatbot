@@ -1,6 +1,6 @@
-
 import numpy as np
 from scipy.signal import stft
+
 
 def compute_stft(x, fs, window, nperseg, noverlap):
     """
@@ -20,6 +20,7 @@ def compute_stft(x, fs, window, nperseg, noverlap):
     """
     f, t, Zxx = stft(x, fs, window, nperseg, noverlap)
     return f, t, Zxx
+
 
 def compute_istft(Zxx, fs, window, nperseg, noverlap):
     """

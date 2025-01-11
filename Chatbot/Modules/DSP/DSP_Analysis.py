@@ -1,7 +1,9 @@
-import numpy as np
-from STFT import compute_stft, compute_istft
 import matplotlib.pyplot as plt
-from Fourier_Analysis import FFT, apply_zero_phase_window, analysis_synthesis, apply_filter
+import numpy as np
+from Fourier_Analysis import (FFT, analysis_synthesis, apply_filter,
+                              apply_zero_phase_window)
+from STFT import compute_istft, compute_stft
+
 
 def compute_odf(x, fs, window, nperseg, noverlap):
     """
@@ -21,6 +23,7 @@ def compute_odf(x, fs, window, nperseg, noverlap):
     odf = np.sum(np.abs(Zxx), axis=0)
     return odf
 
+
 def extract_main_lobe(x, fs, window, nperseg):
     """
     Extract the main lobe of the magnitude spectrum of a window.
@@ -39,11 +42,12 @@ def extract_main_lobe(x, fs, window, nperseg):
 
     # Compute magnitude spectrum
     mag_spectrum = np.abs(X)
-    
+
     # Extract main lobe
-    main_lobe = mag_spectrum[:nperseg//2]
-    
+    main_lobe = mag_spectrum[: nperseg // 2]
+
     return main_lobe
+
 
 def compute_snr(original, reconstructed):
     """
@@ -58,15 +62,16 @@ def compute_snr(original, reconstructed):
     """
     # Compute the power of the original signal
     power_original = np.sum(original**2)
-    
+
     # Compute the power of the noise
     noise = original - reconstructed
     power_noise = np.sum(noise**2)
-    
+
     # Compute the Signal-to-Noise Ratio (SNR) in dB
     snr = 10 * np.log10(power_original / power_noise)
-    
+
     return snr
+
 
 def compute_spectrum(x):
     """
@@ -80,11 +85,12 @@ def compute_spectrum(x):
     """
     # Compute FFT
     X = FFT(x)
-    
+
     # Compute magnitude spectrum
     spectrum = np.abs(X)
-    
+
     return spectrum
+
 
 def apply_window(x, N):
     """
@@ -100,6 +106,7 @@ def apply_window(x, N):
     x_windowed = apply_zero_phase_window(x, N)
     return x_windowed
 
+
 def filter_signal(x, h):
     """
     Apply a filter to the signal.
@@ -114,6 +121,7 @@ def filter_signal(x, h):
     y = apply_filter(x, h)
     return y
 
+
 def compute_correlation(signal1, signal2):
     """
     Compute the correlation between two signals.
@@ -125,7 +133,8 @@ def compute_correlation(signal1, signal2):
     Returns:
     correlation (float): The correlation between the two signals
     """
-    return np.correlate(signal1, signal2, mode='same')
+    return np.correlate(signal1, signal2, mode="same")
+
 
 def compute_serial_correlation(signal, lag=1):
     """
@@ -138,7 +147,8 @@ def compute_serial_correlation(signal, lag=1):
     Returns:
     correlation (float): The serial correlation at the given lag
     """
-    return np.correlate(signal[:-lag], signal[lag:], mode='valid')
+    return np.correlate(signal[:-lag], signal[lag:], mode="valid")
+
 
 def compute_autocorrelation(signal):
     """
@@ -150,16 +160,4 @@ def compute_autocorrelation(signal):
     Returns:
     autocorrelation (numpy array): The autocorrelation of the signal
     """
-    return np.correlate(signal, signal, mode='full')
-    
-
-
-
-
-
-
-
-
-
-
-
+    return np.correlate(signal, signal, mode="full")

@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+from Converting_words_to_Features import FeatureExtractor
+from Lemmatizing import Lemmatizer
+from StopWords import RemoveStopWords
 from Text_Classification import TextClassification
 from Tokenizing_Words import Tokenizer
-from StopWords import RemoveStopWords
-from Lemmatizing import Lemmatizer
-from Converting_words_to_Features import FeatureExtractor
+
 
 class NaiveBayesTextClassification:
     def __init__(self, documents, num_features=3000):
         if not all(isinstance(doc, tuple) and len(doc) == 2 for doc in documents):
-            raise ValueError("Each document should be a tuple of two elements: (rev, category)")
+            raise ValueError(
+                "Each document should be a tuple of two elements: (rev, category)"
+            )
         self.documents = documents
         self.extractor = FeatureExtractor(num_features)
         self.classifier = TextClassification()
@@ -29,15 +32,10 @@ class NaiveBayesTextClassification:
         if not featuresets:
             raise ValueError("No features could be extracted from the documents")
         self.classifier.train_model(featuresets, num_train)
-        
+
     def classify(self, new_text):
         preprocessed_text = self.preprocess((new_text, ""))[0]
         features = self.extractor.find_features(preprocessed_text)
         if not features:
             raise ValueError("No features could be extracted from the new text")
         return self.classifier.classify(features)
-
-
-
-
-

@@ -1,5 +1,5 @@
-
 import numpy as np
+
 
 def genSine(A, f, phi, fs, t):
     """
@@ -19,6 +19,7 @@ def genSine(A, f, phi, fs, t):
     phases = 2 * np.pi * f * n / fs + phi
     x = A * np.sin(phases)
     return x
+
 
 def genComplexSine(k, N):
     """

@@ -1,12 +1,14 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+from Fourier_Analysis import FFT, IDFT, zero_padding
 from pydub import AudioSegment
 from pydub.playback import play
-from Fourier_Analysis import FFT, zero_padding, IDFT
+
 
 def generate_gaussian_noise(duration, sample_rate=44100, mean=0, std_dev=1):
     n_samples = int(duration * sample_rate)
     return np.random.normal(mean, std_dev, n_samples)
+
 
 def generate_pink_noise(duration, sample_rate=44100):
     n_samples = int(duration * sample_rate)
@@ -27,6 +29,7 @@ def generate_pink_noise(duration, sample_rate=44100):
     pink_noise /= np.max(np.abs(pink_noise))
     return pink_noise  # np.fft.irfft always returns real output
 
+
 def generate_brown_noise(duration, sample_rate=44100):
     n_samples = int(duration * sample_rate)
     # Generate white noise
@@ -43,12 +46,14 @@ def generate_brown_noise(duration, sample_rate=44100):
     # Convert back to time domain using the inverse FFT
     brown_noise = np.fft.irfft(brown_noise_freq)
     # Normalize the signal to prevent clipping
-    
+
     return brown_noise  # np.fft.irfft always returns real output
+
 
 def generate_uncorrelated_uniform_noise(duration, sample_rate=44100, low=-1, high=1):
     n_samples = int(duration * sample_rate)
     return np.random.uniform(low, high, n_samples)
+
 
 # if __name__ == "__main__":
 #     # Generate pink noise

@@ -1,19 +1,24 @@
 import re
-import numpy as np
+import sys
+
 import matplotlib.pyplot as plt
+import numpy as np
 from pydub import AudioSegment
 from pydub.playback import play
-import sys
+
 # Add paths for custom modules
-sys.path.append('C:\\Users\\PC\\source\\repos\\Chatbot\\Chatbot\\Voice_Recognition')
-sys.path.append('C:\\Users\\PC\\source\\repos\\Chatbot\\Chatbot\\DSP')
-from Sound_Synthesis import generate_sine_wave
-from Filters import butter_lowpass_filter
+sys.path.append("C:\\Users\\PC\\source\\repos\\Chatbot\\Chatbot\\Voice_Recognition")
+sys.path.append("C:\\Users\\PC\\source\\repos\\Chatbot\\Chatbot\\DSP")
 from DSP_Analysis import compute_spectrum
+from Filters import butter_lowpass_filter
+from Sound_Synthesis import generate_sine_wave
+
 
 class Main:
     def __init__(self):
-        self.matching_phrases = {'create_reese_bass': [r'.*create.*reese bass.*', r'.*make.*reese bass.*']}
+        self.matching_phrases = {
+            "create_reese_bass": [r".*create.*reese bass.*", r".*make.*reese bass.*"]
+        }
         self.fs = 96000  # Sampling frequency
 
     def create_reese_bass(self, frequency, duration):
@@ -32,7 +37,7 @@ class Main:
         cutoff = 300  # Lower cutoff frequency for less noise
         order = 8  # Higher order for steeper roll-off
         # reese_bass = butter_lowpass_filter(reese_bass, cutoff, self.fs, order)
-        
+
         sine_wave = generate_sine_wave(frequency, A, self.fs, duration)
         sine_wave_filtered = butter_lowpass_filter(sine_wave, cutoff, self.fs, order)
         sine_wave_filtered_array = np.array(sine_wave_filtered)
@@ -43,23 +48,28 @@ class Main:
         for intent, patterns in self.matching_phrases.items():
             for pattern in patterns:
                 if re.match(pattern, user_input):
-                    if intent == 'create_reese_bass':
-                        reese_bass = self.create_reese_bass(40, 3)  # Create a Reese Bass at 40 Hz for 3 seconds
+                    if intent == "create_reese_bass":
+                        reese_bass = self.create_reese_bass(
+                            40, 3
+                        )  # Create a Reese Bass at 40 Hz for 3 seconds
                         spectrum = compute_spectrum(reese_bass)
                         spectrum_array = np.array(spectrum)
-                        reese_bass_sound = AudioSegment(reese_bass, frame_rate=self.fs, sample_width=2, channels=1)
-                      
+                        reese_bass_sound = AudioSegment(
+                            reese_bass, frame_rate=self.fs, sample_width=2, channels=1
+                        )
+
                         plt.figure()
                         plt.plot(spectrum_array)
                         plt.title("Reese Bass Signal")
                         plt.xlabel("Time (samples)")
                         plt.ylabel("Amplitude")
                         plt.show()
-                        
+
                         play(reese_bass_sound)
-             
+
                         return "Creating and playing a Reese Bass."
         return "I'm sorry, I didn't understand that. Could you please rephrase?"
+
 
 if __name__ == "__main__":
     main = Main()
@@ -67,7 +77,7 @@ if __name__ == "__main__":
         user_input = input("Please enter a command: ")
         response = main.respond_to(user_input)
         print(response)
-        assert response != "I'm sorry, I didn't understand that. Could you please rephrase?", "Invalid command."
-        
-
-
+        assert (
+            response
+            != "I'm sorry, I didn't understand that. Could you please rephrase?"
+        ), "Invalid command."

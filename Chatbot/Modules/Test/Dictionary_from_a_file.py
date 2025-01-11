@@ -1,10 +1,13 @@
-import nltk 
-from nltk.tokenize import word_tokenize, sent_tokenize
+import nltk
+from nltk.tokenize import sent_tokenize, word_tokenize
 from PyPDF2 import PdfReader
 
-with open('D:\\Roba da autodidatta\\Musica\\Teoria e Armonia Musicale\\Hollywood Chord Progressions.pdf', 'rb') as file:
+with open(
+    "D:\\Roba da autodidatta\\Musica\\Teoria e Armonia Musicale\\Hollywood Chord Progressions.pdf",
+    "rb",
+) as file:
     reader = PdfReader(file)
-    raw = ''
+    raw = ""
     for page in reader.pages:
         raw += page.extract_text()
 
@@ -14,10 +17,3 @@ words = [w.lower() for w in tokens]
 print(words)
 vocab = sorted(set(words))
 print(vocab)
-
-
-
-
-
-
-

@@ -1,11 +1,10 @@
 import nltk
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from nltk.stem import WordNetLemmatizer
 import speech_recognition as sr
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
 
 # Initialize resources for text pre-processing
-stop_words = set(stopwords.words('english'))
+stop_words = set(stopwords.words("english"))
 stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
 
@@ -14,15 +13,15 @@ r = sr.Recognizer()
 
 # Capture the input from the user
 with sr.Microphone() as source:
-    while True: 
+    while True:
         print("Listening for command...")
         audio = r.listen(source)
-        
-        text = "" 
+
+        text = ""
         try:
             text = r.recognize_google(audio)
             print("You said " + text)
-            break  
+            break
         except:
             print("Sorry, I didn't understand that. Please try again.")
 
